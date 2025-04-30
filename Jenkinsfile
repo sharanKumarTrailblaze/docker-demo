@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'sharanperla/docker-demo'
-        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'  // set this in Jenkins
+        DOCKER_IMAGE = 'sharankumartrailblaze/docker-demo'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
     }
 
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/yourusername/your-springboot-repo.git'
+                git 'https://github.com/sharankumartrailblaze/docker-demo.git'
             }
         }
 
@@ -29,12 +29,21 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry([credentialsId: "${DOCKER_CREDENTIALS_ID}", url: '']) {
-                    script {
+                script {
+                    docker.withRegistry('', "${DOCKER_CREDENTIALS_ID}") {
                         docker.image("${DOCKER_IMAGE}").push('latest')
                     }
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Build and push successful!"
+        }
+        failure {
+            echo "❌ Build failed!"
         }
     }
 }
