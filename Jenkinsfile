@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/sharankumartrailblaze/docker-demo.git'
+                 git branch: 'main', url: 'https://github.com/sharankumartrailblaze/docker-demo.git'
             }
         }
 
