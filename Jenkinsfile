@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'sharankumartrailblaze/docker-demo'
-        DOCKER_CREDENTIALS_ID = 'docker-hub-creds',
+        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
          GIT_CREDENTIALS_ID = 'github-credentials'
     }
 
